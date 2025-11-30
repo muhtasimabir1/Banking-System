@@ -1,0 +1,654 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Banking System - Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <!-- Mobile overlay -->
+        <div class="mobile-overlay" id="mobile-overlay" onclick="closeMobileMenu()"></div>
+
+        <aside class="sidebar" id="sidebar">
+            <div class="logo">
+                <h1>Banking System</h1>
+                <button class="close-menu" id="close-menu" onclick="closeMobileMenu()">✕</button>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-section="dashboard">
+                    <span class="icon">📊</span> <span class="nav-text">Dashboard</span>
+                </button>
+                <button class="nav-btn" data-section="accounts">
+                    <span class="icon">💳</span> <span class="nav-text">Accounts</span>
+                </button>
+                <button class="nav-btn" data-section="cards">
+                    <span class="icon">🎫</span> <span class="nav-text">Cards</span>
+                </button>
+                <button class="nav-btn" data-section="bills">
+                    <span class="icon">📋</span> <span class="nav-text">Pay Bills</span>
+                </button>
+                <button class="nav-btn" data-section="transfer">
+                    <span class="icon">💸</span> <span class="nav-text">Transfer</span>
+                </button>
+                <button class="nav-btn" data-section="transactions">
+                    <span class="icon">📜</span> <span class="nav-text">Transactions</span>
+                </button>
+                <button class="nav-btn" data-section="loans">
+                    <span class="icon">🏦</span> <span class="nav-text">Loans</span>
+                </button>
+                <button class="nav-btn" data-section="analytics">
+                    <span class="icon">📈</span> <span class="nav-text">Analytics</span>
+                </button>
+                <button class="nav-btn" data-section="settings">
+                    <span class="icon">⚙️</span> <span class="nav-text">Settings</span>
+                </button>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">👤</div>
+                <div class="profile-info">
+                    <p class="profile-name" id="user-name">Your Name</p>
+                    <p class="profile-email" id="user-email">yourname@example.com</p>
+                </div>
+            </div>
+        </aside>
+
+        <!-- Mobile Bottom Navigation -->
+        <nav class="bottom-nav" id="bottom-nav">
+            <button class="bottom-nav-item active" data-section="dashboard" onclick="switchSection(this)">
+                <span class="icon">📊</span>
+                <span class="label">Home</span>
+            </button>
+            <button class="bottom-nav-item" data-section="accounts" onclick="switchSection(this)">
+                <span class="icon">💳</span>
+                <span class="label">Accounts</span>
+            </button>
+            <button class="bottom-nav-item" data-section="cards" onclick="switchSection(this)">
+                <span class="icon">🎫</span>
+                <span class="label">Cards</span>
+            </button>
+            <button class="bottom-nav-item" data-section="bills" onclick="switchSection(this)">
+                <span class="icon">📋</span>
+                <span class="label">Bills</span>
+            </button>
+            <button class="bottom-nav-item" data-section="transfer" onclick="switchSection(this)">
+                <span class="icon">💸</span>
+                <span class="label">Transfer</span>
+            </button>
+            <button class="bottom-nav-item" id="more-btn" onclick="showMoreMenu()">
+                <span class="icon">⋮</span>
+                <span class="label">More</span>
+            </button>
+        </nav>
+
+        <!-- More Menu Popup -->
+        <div class="more-menu" id="more-menu">
+            <button class="more-menu-item" data-section="transactions" onclick="switchSection(this)">
+                <span class="icon">📜</span> Transactions
+            </button>
+            <button class="more-menu-item" data-section="loans" onclick="switchSection(this)">
+                <span class="icon">🏦</span> Loans
+            </button>
+            <button class="more-menu-item" data-section="analytics" onclick="switchSection(this)">
+                <span class="icon">📈</span> Analytics
+            </button>
+            <button class="more-menu-item" data-section="settings" onclick="switchSection(this)">
+                <span class="icon">⚙️</span> Settings
+            </button>
+        </div>
+
+        <main class="main-content" id="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <button class="mobile-menu-btn" id="mobile-menu-btn" onclick="toggleMobileMenu()">☰</button>
+                    <h2 id="page-title">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <button class="notification-btn" onclick="showComingSoon('Notifications')">🔔</button>
+                    <button class="logout-btn" id="logout-btn">Logout</button>
+                </div>
+            </header>
+
+            <section id="dashboard" class="section active">
+                <div class="welcome-banner">
+                    <h3>Welcome back, <span id="greet-name">XXX</span>! 👋</h3>
+                    <p>Here's your financial overview</p>
+                </div>
+
+                <div class="cards-grid">
+                    <div class="card balance-card">
+                        <div class="card-header">
+                            <h4>Total Balance</h4>
+                            <span class="icon-lg">💰</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="amount">৳24,850.50</p>
+                            <p class="subtitle">Across all accounts</p>
+                        </div>
+                    </div>
+
+                    <div class="card savings-card">
+                        <div class="card-header">
+                            <h4>Savings Account</h4>
+                            <span class="icon-lg">🏦</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="amount">৳15,200.00</p>
+                            <p class="subtitle">Interest: 2.5% APY</p>
+                        </div>
+                    </div>
+
+                    <div class="card checking-card">
+                        <div class="card-header">
+                            <h4>Checking Account</h4>
+                            <span class="icon-lg">✓</span>
+                        </div>
+                        <div class="card-body">
+                            <p class="amount">৳9,650.50</p>
+                            <p class="subtitle">No monthly fees</p>
+                        </div>
+                    </div>
+
+                    <div class="card actions-card">
+                        <div class="card-header">
+                            <h4>Quick Actions</h4>
+                            <span class="icon-lg">⚡</span>
+                        </div>
+                        <div class="card-body quick-actions">
+                            <button class="quick-btn" id="deposit-btn" onclick="openDepositModal()">💸 Deposit</button>
+                            <button class="quick-btn" id="send-money-btn" onclick="goToSection('transfer')">💸 Send Money</button>
+                            <button class="quick-btn" id="pay-bills-btn" onclick="goToSection('bills')">📋 Pay Bills</button>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="dashboard-bottom">
+                    <div class="transactions-section">
+                        <h3>Recent Transactions</h3>
+                        <div class="transaction-list" id="recent-transactions">
+                            <p style="color: #999; text-align: center;">Loading transactions...</p>
+                        </div>
+                    </div>
+
+                    <div class="spending-category">
+                        <h3>Spending by Category</h3>
+                        <div class="category-list">
+                            <div class="category-item">
+                                <div class="category-info">
+                                    <span class="category-icon">🛍️</span>
+                                    <div>
+                                        <p class="category-name">Shopping</p>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 60%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="category-amount">৳456.78</p>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-info">
+                                    <span class="category-icon">🍔</span>
+                                    <div>
+                                        <p class="category-name">Dining</p>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 35%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="category-amount">৳263.45</p>
+                            </div>
+                            <div class="category-item">
+                                <div class="category-info">
+                                    <span class="category-icon">⛽</span>
+                                    <div>
+                                        <p class="category-name">Transportation</p>
+                                        <div class="progress-bar">
+                                            <div class="progress-fill" style="width: 45%;"></div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <p class="category-amount">৳338.92</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="accounts" class="section">
+                <div class="section-header">
+                    <h3>Your Accounts</h3>
+                    <button class="btn btn-primary" onclick="showContactSupport('Add Account')">+ Add Account</button>
+                </div>
+
+                <div class="accounts-container"></div>
+            </section>
+
+            <section id="cards" class="section">
+                <div class="section-header">
+                    <h3>Your Cards</h3>
+                    <button class="btn btn-primary" onclick="showContactSupport('Order Card')">+ Order Card</button>
+                </div>
+
+                <div class="cards-container"></div>
+
+                <div class="card-management">
+                    <h3 style="margin-top: 30px;">Card Management</h3>
+                    <div class="management-grid">
+                        <div class="management-item">
+                            <h4>🔒 Card Security</h4>
+                            <p>Freeze, unfreeze, or lock your card for online purchases</p>
+                            <button class="btn btn-secondary" onclick="showComingSoon('Card Security Management')">Manage Security</button>
+                        </div>
+                        <div class="management-item">
+                            <h4>📍 PIN & Settings</h4>
+                            <p>Change PIN, manage card limits, and notification settings</p>
+                            <button class="btn btn-secondary" onclick="showComingSoon('Card Settings')">Card Settings</button>
+                        </div>
+                        <div class="management-item">
+                            <h4>🔄 Replace Card</h4>
+                            <p>Order a replacement card if damaged or lost</p>
+                            <button class="btn btn-secondary" onclick="showComingSoon('Card Replacement')">Order Replacement</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="bills" class="section">
+                <div class="section-header">
+                    <h3>Pay Bills</h3>
+                </div>
+
+                <div class="bills-container">
+                    <div class="bills-list">
+                        <h4>Outstanding Bills</h4>
+                        <div class="bills-table" id="bills-list">
+                            <p style="color: #999; text-align: center; padding: 20px;">Loading bills...</p>
+                        </div>
+                    </div>
+
+                    <div class="bill-payment-form">
+                        <h4>Pay a Bill</h4>
+                        <form id="bill-payment-form">
+                            <div class="form-group">
+                                <label for="bill-selector">Select Bill</label>
+                                <select id="bill-selector" required>
+                                    <option>Choose a bill...</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="bill-details">Bill Details</label>
+                                <div class="bill-details" id="bill-details" style="background: #f8f9ff; padding: 15px; border-radius: 6px; margin-bottom: 10px;">
+                                    <p style="color: #999; font-size: 14px;">Select a bill to see details</p>
+                                </div>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="payment-account">Pay From Account</label>
+                                <select id="payment-account" required>
+                                    <option>Choose account...</option>
+                                </select>
+                            </div>
+
+                            <div class="form-group">
+                                <label for="payment-amount">Amount to Pay</label>
+                                <div class="amount-input">
+                                    <span>৳</span>
+                                    <input type="number" id="payment-amount" placeholder="0.00" step="0.01" min="0" required>
+                                </div>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary btn-lg">Pay Bill</button>
+                        </form>
+
+                        <div id="bill-payment-success" class="success-message hidden">
+                            <h4>✓ Bill Paid Successfully!</h4>
+                            <p id="payment-success-details"></p>
+                            <button type="button" class="btn btn-secondary">Done</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="transfer" class="section">
+                <div class="section-header">
+                    <h3>Send Money</h3>
+                </div>
+
+                <div class="form-container">
+                    <form id="transfer-form">
+                        <div class="form-group">
+                            <label for="from-account">From Account</label>
+                            <select id="from-account" required>
+                                <option>Checking (•••• 4829)</option>
+                                <option>Savings (•••• 5012)</option>
+                            </select>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-name">Recipient Name</label>
+                            <input type="text" id="recipient-name" placeholder="Enter name" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="recipient-account">Recipient Account</label>
+                            <input type="text" id="recipient-account" placeholder="Enter account number" required>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="amount">Amount</label>
+                            <div class="amount-input">
+                                <span>৳</span>
+                                <input type="number" id="amount" placeholder="0.00" step="0.01" min="0" required>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label for="description">Description (Optional)</label>
+                            <textarea id="description" placeholder="Enter transaction description" rows="3"></textarea>
+                        </div>
+
+                        <button type="submit" class="btn btn-primary btn-lg">Send Money</button>
+                    </form>
+
+                    <div id="transfer-success" class="success-message hidden">
+                        <h4>✓ Transfer Successful!</h4>
+                        <p id="success-details"></p>
+                        <button type="button" class="btn btn-secondary" onclick="resetTransferForm()">Done</button>
+                    </div>
+                </div>
+            </section>
+
+            <section id="transactions" class="section">
+                <div class="section-header">
+                    <h3>Transaction History</h3>
+                    <div class="filter-controls">
+                        <select id="filter-month">
+                            <option>All Months</option>
+                            <option>November 2025</option>
+                            <option>October 2025</option>
+                            <option>September 2025</option>
+                        </select>
+                    </div>
+                </div>
+
+                <div class="transactions-full" id="transactions-full">
+                    <p style="color: #999; text-align: center; padding: 20px;">Loading transactions...</p>
+                </div>
+            </section>
+
+            <section id="analytics" class="section">
+                <div class="section-header">
+                    <h3>Financial Analytics</h3>
+                </div>
+
+                <div class="analytics-container">
+                    <div class="chart-container">
+                        <h4>Monthly Spending Trends</h4>
+                        <canvas id="spendingChart"></canvas>
+                    </div>
+
+                    <div class="chart-container">
+                        <h4>Spending by Category</h4>
+                        <canvas id="categoryChart"></canvas>
+                    </div>
+
+                    <div class="analytics-stats">
+                        <div class="stat-box">
+                            <h4>Average Daily Spending</h4>
+                            <p class="stat-value">৳125.40</p>
+                            <p class="stat-label">This month</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>Total Savings</h4>
+                            <p class="stat-value">৳2,450.00</p>
+                            <p class="stat-label">This month</p>
+                        </div>
+                        <div class="stat-box">
+                            <h4>Budget Used</h4>
+                            <p class="stat-value">68%</p>
+                            <p class="stat-label">Of monthly budget</p>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="loans" class="section">
+                <div class="loans-section">
+                    <div class="loans-header">
+                        <h2>Loan Services</h2>
+                        <p id="loans-status">No active loans</p>
+                    </div>
+                    <div class="loans-content">
+                        <div class="loan-application-card">
+                            <h3>Apply for New Loan</h3>
+                            <form id="loan-form">
+                                <div class="form-group">
+                                    <label>Loan Type</label>
+                                    <select id="loan-type" required>
+                                        <option value="home">Home Loan (8.5%)</option>
+                                        <option value="personal">Personal Loan (12.0%)</option>
+                                        <option value="auto">Auto Loan (7.5%)</option>
+                                        <option value="education">Education Loan (6.5%)</option>
+                                    </select>
+                                </div>
+                                <div class="form-group">
+                                    <label>Loan Amount</label>
+                                    <input type="number" id="loan-amount" placeholder="0.00" step="0.01" min="0" required>
+                                </div>
+                                <div class="form-group">
+                                    <label>Tenure (Months)</label>
+                                    <select id="loan-tenure" required>
+                                        <option value="12">12 Months</option>
+                                        <option value="24">24 Months</option>
+                                        <option value="36">36 Months</option>
+                                        <option value="48">48 Months</option>
+                                        <option value="60">60 Months</option>
+                                    </select>
+                                </div>
+                                <button type="submit" class="btn-apply-loan">Apply Loan</button>
+                            </form>
+                        </div>
+                        <div id="loans-list"></div>
+                    </div>
+                </div>
+            </section>
+
+            <section id="settings" class="section">
+                <div class="section-header">
+                    <h3>Settings</h3>
+                </div>
+
+                <div class="settings-container">
+                    <div class="settings-section">
+                        <h4>Account Settings</h4>
+                        <form id="profile-form">
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <p class="setting-name">Full Name</p>
+                                    <p class="setting-description">Your display name</p>
+                                </div>
+                                <input type="text" id="setting-name" class="setting-input" required>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <p class="setting-name">Email Address</p>
+                                    <p class="setting-description">Your login email (cannot be changed)</p>
+                                </div>
+                                <input type="email" id="setting-email" class="setting-input" disabled>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <p class="setting-name">Phone Number</p>
+                                    <p class="setting-description">For account recovery</p>
+                                </div>
+                                <input type="tel" id="setting-phone" class="setting-input">
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Save Profile</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-section">
+                        <h4>Security Settings</h4>
+                        <form id="password-form">
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <p class="setting-name">Current Password</p>
+                                </div>
+                                <input type="password" id="current-password" class="setting-input" placeholder="Enter current password" required>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <p class="setting-name">New Password</p>
+                                </div>
+                                <input type="password" id="new-password" class="setting-input" placeholder="Min 6 characters" required>
+                            </div>
+
+                            <div class="setting-item">
+                                <div class="setting-label">
+                                    <p class="setting-name">Confirm Password</p>
+                                </div>
+                                <input type="password" id="confirm-password" class="setting-input" placeholder="Confirm new password" required>
+                            </div>
+
+                            <button type="submit" class="btn btn-primary">Change Password</button>
+                        </form>
+                    </div>
+
+                    <div class="settings-section">
+                        <h4>Notification Settings</h4>
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <p class="setting-name">Email Notifications</p>
+                                <p class="setting-description">Receive updates via email</p>
+                            </div>
+                            <button class="toggle-btn enabled">On</button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <p class="setting-name">SMS Alerts</p>
+                                <p class="setting-description">Get text alerts for transactions</p>
+                            </div>
+                            <button class="toggle-btn">Off</button>
+                        </div>
+                    </div>
+
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Account Details Modal -->
+    <div id="detailsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Account Details</h3>
+                <button class="modal-close" onclick="closeModal('detailsModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="modal-info">
+                    <span class="modal-info-label">Account Name</span>
+                    <span class="modal-info-value" id="detailName">-</span>
+                </div>
+                <div class="modal-info">
+                    <span class="modal-info-label">Account Type</span>
+                    <span class="modal-info-value" id="detailType">-</span>
+                </div>
+                <div class="modal-info">
+                    <span class="modal-info-label">Card Number</span>
+                    <span class="modal-info-value" id="detailCard">-</span>
+                </div>
+                <div class="modal-info">
+                    <span class="modal-info-label">Balance</span>
+                    <span class="modal-info-value" id="detailBalance">-</span>
+                </div>
+                <div class="modal-info">
+                    <span class="modal-info-label">APY</span>
+                    <span class="modal-info-value" id="detailAPY">-</span>
+                </div>
+                <div class="modal-info">
+                    <span class="modal-info-label">Status</span>
+                    <span class="modal-info-value"><span class="status-badge" id="detailStatus">active</span></span>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('detailsModal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Account Settings Modal -->
+    <div id="settingsModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Account Settings</h3>
+                <button class="modal-close" onclick="closeModal('settingsModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="settingName">Account Name</label>
+                    <input type="text" id="settingName" placeholder="Account name">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('settingsModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="saveAccountSettings()">Save Changes</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Coming Soon Modal -->
+    <div id="comingSoonModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Coming Soon</h3>
+                <button class="modal-close" onclick="closeModal('comingSoonModal')">×</button>
+            </div>
+            <div class="modal-body" style="text-align: center;">
+                <p style="font-size: 48px; margin: 20px 0;">🚀</p>
+                <p id="comingSoonMessage" style="font-size: 18px; color: #666;">This feature will be available soon!</p>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-primary" onclick="closeModal('comingSoonModal')">Got it!</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Deposit Modal -->
+    <div id="depositModal" class="modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>💸 Deposit Money</h3>
+                <button class="modal-close" onclick="closeModal('depositModal')">×</button>
+            </div>
+            <div class="modal-body">
+                <div class="form-group">
+                    <label for="deposit-account">Select Account</label>
+                    <select id="deposit-account">
+                        <option value="">Choose an account...</option>
+                        <option value="checking">Checking Account</option>
+                        <option value="savings">Savings Account</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="deposit-amount">Amount (৳)</label>
+                    <input type="number" id="deposit-amount" placeholder="Enter amount" step="0.01" min="0">
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="modal-btn modal-btn-secondary" onclick="closeModal('depositModal')">Cancel</button>
+                <button class="modal-btn modal-btn-primary" onclick="submitDeposit()">Deposit</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="dashboard.js"></script>
+</body>
+</html>

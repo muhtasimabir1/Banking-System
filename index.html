@@ -1,0 +1,141 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Modern Banking System</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+    <div class="container">
+        <aside class="sidebar">
+            <div class="logo">
+                <h1>Banking System</h1>
+            </div>
+            <nav class="nav">
+                <button class="nav-btn active" data-section="dashboard">
+                    <span class="icon">📊</span> Dashboard
+                </button>
+                <button class="nav-btn" data-section="accounts">
+                    <span class="icon">💳</span> Accounts
+                </button>
+                <button class="nav-btn" data-section="cards">
+                    <span class="icon">🎫</span> Cards
+                </button>
+                <button class="nav-btn" data-section="transfer">
+                    <span class="icon">💸</span> Transfer
+                </button>
+                <button class="nav-btn" data-section="transactions">
+                    <span class="icon">📜</span> Transactions
+                </button>
+                <button class="nav-btn" data-section="analytics">
+                    <span class="icon">📈</span> Analytics
+                </button>
+                <button class="nav-btn" data-section="settings">
+                    <span class="icon">⚙️</span> Settings
+                </button>
+            </nav>
+            <div class="user-profile">
+                <div class="avatar">👤</div>
+                <div class="profile-info">
+                    <p class="profile-name">Your Name</p>
+                    <p class="profile-email">yourname@example.com</p>
+                </div>
+            </div>
+        </aside>
+
+        <main class="main-content">
+            <header class="header">
+                <div class="header-left">
+                    <h2 id="page-title">Dashboard</h2>
+                </div>
+                <div class="header-right">
+                    <button class="notification-btn">🔔</button>
+                    <button class="logout-btn">Logout</button>
+                </div>
+            </header>
+
+            <section id="dashboard" class="section active">
+                <p>Dashboard loaded via JavaScript</p>
+            </section>
+
+            <section id="accounts" class="section">
+                <p>Accounts loaded via JavaScript</p>
+            </section>
+
+            <section id="cards" class="section">
+                <p>Cards loaded via JavaScript</p>
+            </section>
+
+            <section id="transfer" class="section">
+                <p>Transfer section loaded via JavaScript</p>
+            </section>
+
+            <section id="transactions" class="section">
+                <p>Transactions loaded via JavaScript</p>
+            </section>
+
+            <section id="analytics" class="section">
+                <p>Analytics loaded via JavaScript</p>
+            </section>
+
+            <section id="settings" class="section">
+                <p>Settings loaded via JavaScript</p>
+
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <p class="setting-name">Phone Number</p>
+                                <p class="setting-description">For account recovery</p>
+                            </div>
+                            <input type="tel" value="+1 (555) 123-4567" class="setting-input">
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h4>Security Settings</h4>
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <p class="setting-name">Two-Factor Authentication</p>
+                                <p class="setting-description">Add extra security to your account</p>
+                            </div>
+                            <button class="toggle-btn enabled">Enabled</button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <p class="setting-name">Change Password</p>
+                                <p class="setting-description">Update your password regularly</p>
+                            </div>
+                            <button class="btn btn-secondary">Change</button>
+                        </div>
+                    </div>
+
+                    <div class="settings-section">
+                        <h4>Notification Settings</h4>
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <p class="setting-name">Email Notifications</p>
+                                <p class="setting-description">Receive updates via email</p>
+                            </div>
+                            <button class="toggle-btn enabled">On</button>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-label">
+                                <p class="setting-name">SMS Alerts</p>
+                                <p class="setting-description">Get text alerts for transactions</p>
+                            </div>
+                            <button class="toggle-btn">Off</button>
+                        </div>
+                    </div>
+
+                    <button class="btn btn-primary">Save Changes</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
